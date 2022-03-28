@@ -11,9 +11,15 @@ Pod::Spec.new do |s|
   s.authors      = package["author"]
 
   s.platforms    = { :ios => "10.0" }
-  s.source       = { :git => "https://github.com/brice-gros/react-native-unity-view.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/abubakr1537/react-native-unity-view.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,m,mm}"
 
-  s.dependency "React-Core"
+  s.frameworks = 'UnityFramework'
+  s.dependency "React"
+
+  s.xcconfig = {
+    'FRAMEWORK_SEARCH_PATHS' => '"${PODS_ROOT}/../unityLibrary" "${PODS_CONFIGURATION_BUILD_DIR}"',
+    'OTHER_LDFLAGS' => '$(inherited) -framework UnityFramework ${PODS_LIBRARIES}'
+  }
 end

@@ -1,7 +1,7 @@
 {
-  "name": "@brice-gros/react-native-unity-view",
-  "version": "0.0.3",
-  "description": "Embed Unity Player 2020.3 inside a React Native 0.63 / Node 16 LTS app",
+  "name": "@akrv1537/react-native-unity-view",
+  "version": "0.0.1",
+  "description": "Embed Unity Player 2021.2 inside a React Native 0.63 / Node 16 LTS app",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
@@ -38,13 +38,11 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/brice-gros/react-native-unity-view.git",
-  "author": "Brice Gros <brice.gros+npm@outlook.com> (https://github.com/brice-gros)",
+  "repository": "https://github.com/akrv1537/react-native-unity-view.git",
+  "author": "Abubakr Khabebulloev (https://github.com/akrv1537)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/brice-gros/react-native-unity-view/issues"
-  },
-  "homepage": "https://github.com/brice-gros/react-native-unity-view#readme",
+
+  "homepage": "https://github.com/abubakr1537/react-native-unity-view/blob/main/README.md",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"

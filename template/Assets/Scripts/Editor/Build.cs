@@ -20,7 +20,7 @@ public class Build : MonoBehaviour {
     private static readonly string iosExportPath =
         Path.GetFullPath(Path.Combine(ProjectPath, "../../ios/unityLibrary"));
 
-    [MenuItem("ReactNative/Export Android (Unity 2020.3.*) %&n", false, 1)]
+    [MenuItem("ReactNative/Export Android (Unity 2021.2.*) %&n", false, 1)]
     public static void DoBuildAndroidLibrary() {
         DoBuildAndroid(Path.Combine(apkPath, "unityLibrary"));
         if (File.Exists(androidLocalPropertiesPath)) {
@@ -33,6 +33,7 @@ public class Build : MonoBehaviour {
 
     public static BuildOptions GetBuildOptions() {
         var options = BuildOptions.AcceptExternalModificationsToPlayer;
+        
         // Enable debugging from the Build Settings UI check boxes
         if (UnityEditor.EditorUserBuildSettings.development) {
           options |= BuildOptions.Development;
@@ -88,7 +89,7 @@ public class Build : MonoBehaviour {
     }
 
     // TODO: ios NOT ported yet
-    //[MenuItem("ReactNative/Export IOS (Unity 2020.3.*) %&i", false, 3)]
+    [MenuItem("ReactNative/Export IOS (Unity 2021.2.*) %&i", false, 3)]
     public static void DoBuildIOS() {
         if (Directory.Exists(iosExportPath)) {
             Directory.Delete(iosExportPath, true);
@@ -96,12 +97,13 @@ public class Build : MonoBehaviour {
 
         EditorUserBuildSettings.iOSBuildConfigType = iOSBuildType.Release;
 
-        var report = BuildPipeline.BuildPlayer(
-            GetEnabledScenes(),
-            iosExportPath,
-            BuildTarget.iOS,
-            GetBuildOptions()
-        );
+        BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
+        buildPlayerOptions.scenes = GetEnabledScenes();
+        buildPlayerOptions.locationPathName  = iosExportPath;
+        buildPlayerOptions.target = BuildTarget.iOS;
+        buildPlayerOptions.options = BuildPipeline.BuildCanBeAppended(BuildTarget.iOS, "unityLibrary") == CanAppendBuild.Yes?  BuildOptions.AcceptExternalModificationsToPlayer: buildPlayerOptions.None;
+
+        var report = BuildPipeline.BuildPlayer(buildPlayerOptions);
 
         if (report.summary.result != BuildResult.Succeeded) {
             throw new Exception("Build failed");
